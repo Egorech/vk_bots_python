@@ -63,27 +63,34 @@ def main():
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+            try:
+                # search url at vk
+                msg = vk.messages.getById(message_ids = event.message_id)
+                url = msg['items'][0]['attachments'][0]['photo']['sizes'][-1][
+                    'url']
 
-            # search url at vk
-            msg = vk.messages.getById(message_ids = event.message_id)
-            url = msg['items'][0]['attachments'][0]['photo']['sizes'][-1]['url']
+                # write the photo using the url to the images folder, name it ai_photo.jpg
+                r = requests.get(url , stream = True)
+                with open('images/ai_photo.jpg' , 'bw') as f:
+                    for chunk in r.iter_content(8192):
+                        f.write(chunk)
 
-            # write the photo using the url to the images folder, name it ai_photo.jpg
-            r = requests.get(url , stream = True)
-            with open('images/ai_photo.jpg' , 'bw') as f:
-                for chunk in r.iter_content(8192):
-                    f.write(chunk)
+                img = cv2.imread('images/ai_photo.jpg')
 
-            img = cv2.imread('images/ai_photo.jpg')
+                face_recognizer(img)
 
-            face_recognizer(img)
-
-            send_photo('images/ai_photo.jpg')
-            vk.messages.send(
-                chat_id = event.chat_id ,
-                random_id = 0 ,
-                attachment = attachment
-            )
+                send_photo('images/ai_photo.jpg')
+                vk.messages.send(
+                    chat_id = event.chat_id ,
+                    random_id = 0 ,
+                    attachment = attachment
+                )
+            except IndexError:
+                vk.messages.send(
+                    chat_id = event.chat_id ,
+                    message = 'Бот предназначен для распознавания фото.'
+                    , random_id = 0
+                )
 
 
 if __name__ == '__main__':
