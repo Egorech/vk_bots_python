@@ -5,16 +5,19 @@ from vk_api.longpoll import VkLongPoll , VkEventType
 # import all the libraries for the wiki
 import wikipedia
 
+# libraries with vk token and vk group_id
 import  _token
 
 # necessary global variables for the chatbot
 group_id = _token.group_id
 token = _token.token
 
+
 def send_photo( photo1 ):
     """
     function to send photos
     """
+
     global attachment
     upload = vk_api.VkUpload(vk)
     photo = upload.photo_messages(photo1)
@@ -112,8 +115,8 @@ def main():
 
 
 if __name__ == '__main__':
-
     # linking to vk
+
     vk_session = vk_api.VkApi(token = token)
     longpoll = VkLongPoll(vk_session)
     vk = vk_session.get_api()

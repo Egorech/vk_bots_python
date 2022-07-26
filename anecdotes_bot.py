@@ -7,6 +7,7 @@ from vk_api.keyboard import VkKeyboard , VkKeyboardColor
 from anecdotes import anekdot_stirletz , anekdot_sport , anekdot_student
 from random import randint
 
+# libraries with vk token and vk group_id
 import  _token
 
 # necessary global variables for the chatbot
@@ -51,6 +52,7 @@ def main():
 
 
 if __name__ == '__main__':
+
     # keyboard for the anecdote bot
     keyboard = VkKeyboard(one_time = False)
     keyboard.add_button('Анекдот про Штирлица' , color = VkKeyboardColor.NEGATIVE)
