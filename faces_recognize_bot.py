@@ -93,8 +93,8 @@ def main():
 
 
 if __name__ == '__main__':
-    # linking to vk
 
+    # linking to vk
     vk_session = vk_api.VkApi(token = token)
     longpoll = VkLongPoll(vk_session)
     vk = vk_session.get_api()
