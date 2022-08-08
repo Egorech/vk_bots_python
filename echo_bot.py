@@ -3,7 +3,7 @@ import vk_api
 from vk_api.longpoll import VkLongPoll , VkEventType
 
 # libraries with vk token and vk group_id
-import  _token
+import _token
 
 # necessary global variables for the chatbot
 group_id = _token.group_id
@@ -25,7 +25,6 @@ def main():
 
 
 if __name__ == '__main__':
-
     # linking to vk
     vk_session = vk_api.VkApi(token = token)
     longpoll = VkLongPoll(vk_session)

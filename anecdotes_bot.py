@@ -8,11 +8,12 @@ from anecdotes import anekdot_stirletz , anekdot_sport , anekdot_student
 from random import randint
 
 # libraries with vk token and vk group_id
-import  _token
+import _token
 
 # necessary global variables for the chatbot
 group_id = _token.group_id
 token = _token.token
+
 
 def main():
     """
@@ -52,7 +53,6 @@ def main():
 
 
 if __name__ == '__main__':
-
     # keyboard for the anecdote bot
     keyboard = VkKeyboard(one_time = False)
     keyboard.add_button('Анекдот про Штирлица' , color = VkKeyboardColor.NEGATIVE)

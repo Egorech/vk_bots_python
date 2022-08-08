@@ -30,7 +30,8 @@ def send_photo( photo1 ):
     access_key = photo[0]['access_key']
     attachment = f'photo{owner_id}_{photo_id}_{access_key}'
 
-def face_recognizer(img):
+
+def face_recognizer( img ):
     """
     function that frames a person's face in red and writes it to the file ai_photo.jpg
     """
@@ -44,13 +45,11 @@ def face_recognizer(img):
     faces = cv2.CascadeClassifier('front_face.xml')
 
     # coordinates of all found objects
-    results = faces.detectMultiScale(img , scaleFactor = 2 ,
-                                     minNeighbors = 1)
+    results = faces.detectMultiScale(img , scaleFactor = 2 , minNeighbors = 1)
 
     # highlight faces with a red frame
     for (x , y , w , h) in results:
-        cv2.rectangle(img , (x , y) , (x + w , y + h) , (0 , 0 , 255) ,
-                      thickness = 2)
+        cv2.rectangle(img , (x , y) , (x + w , y + h) , (0 , 0 , 255) , thickness = 2)
 
     # file a photo
     cv2.imwrite("images/ai_photo.jpg" , img)

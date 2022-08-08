@@ -33,6 +33,7 @@ def stirletz_parser():
 
     return data
 
+
 def sport_parser():
     """
     function for parsing all anecdotes from anekdot.ru on the topic sport
@@ -56,6 +57,7 @@ def sport_parser():
             data.append(anekdot.text)
 
     return data
+
 
 def student_parser():
     """
@@ -81,8 +83,8 @@ def student_parser():
 
     return data
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     anekdot = stirletz_parser()
     print(anekdot)
     anekdot = sport_parser()
