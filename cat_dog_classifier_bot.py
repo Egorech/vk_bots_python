@@ -42,13 +42,10 @@ def resize_image( img ):
     return img
 
 
-def ai():
+def ai_work():
     """
-    convolutional neural network for classifying cats/dogs, to speed up the work, the model is already trained,
-    you can find the implementation itself in the file neural_network.py
+    function for work with photo
     """
-
-    model_loaded = keras.models.load_model('model_load')
 
     img = load_img('images/cat_dog_photo.png')
     img_array = img_to_array(img)
@@ -79,7 +76,7 @@ def main():
 
                 vk.messages.send(
                     chat_id = event.chat_id ,
-                    message = ai()
+                    message = ai_work()
                     , random_id = 0
                 )
 
@@ -97,5 +94,9 @@ if __name__ == '__main__':
     vk_session = vk_api.VkApi(token = token)
     longpoll = VkLongPoll(vk_session)
     vk = vk_session.get_api()
+
+    #convolutional neural network for classifying cats/dogs, to speed up the work, the model is already trained,
+    #you can find the implementation itself in the file neural_network.py
+    model_loaded = keras.models.load_model('model_load')
 
     main()
