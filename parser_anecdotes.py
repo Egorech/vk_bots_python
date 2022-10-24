@@ -17,12 +17,12 @@ def stirletz_parser():
     data = []
     delimiter = '\n'
 
-    for p in range(1 , 5):  # running through all the pages
+    for p in range(1, 5):  # running through all the pages
         url = f'https://www.anekdot.ru/tags/%D0%A8%D1%82%D0%B8%D1%80%D0%BB%D0%B8%D1%86/{p}'  # parser
         r = requests.get(url)
         sleep(3)
-        soup = BeautifulSoup(r.text , 'lxml')
-        anekdots = soup.findAll('div' , class_ = 'text')
+        soup = BeautifulSoup(r.text, 'lxml')
+        anekdots = soup.findAll('div', class_ = 'text')
 
         for line_break in soup.findAll('br'):  # solve the soup.text problem, which eats up the html tag <br>
             line_break.replaceWith(delimiter)
@@ -42,12 +42,12 @@ def sport_parser():
     data = []
     delimiter = '\n'
 
-    for p in range(1 , 22):  # running through all the pages
+    for p in range(1, 22):  # running through all the pages
         url = f'https://www.anekdot.ru/tags/%D1%81%D0%BF%D0%BE%D1%80%D1%82/{p}'  # parser
         r = requests.get(url)
         sleep(3)
-        soup = BeautifulSoup(r.text , 'lxml')
-        anekdots = soup.findAll('div' , class_ = 'text')
+        soup = BeautifulSoup(r.text, 'lxml')
+        anekdots = soup.findAll('div', class_ = 'text')
 
         for line_break in soup.findAll('br'):  # solve the soup.text problem, which eats up the html tag <br>
             line_break.replaceWith(delimiter)
@@ -67,12 +67,12 @@ def student_parser():
     data = []
     delimiter = '\n'
 
-    for p in range(1 , 20):  # running through all the pages
+    for p in range(1, 20):  # running through all the pages
         url = f'https://humornet.ru/anekdot/pro-studentov/page/{p}/'  # parser
         r = requests.get(url)
         sleep(3)
-        soup = BeautifulSoup(r.text , 'lxml')
-        anekdots = soup.findAll('div' , class_ = 'text')
+        soup = BeautifulSoup(r.text, 'lxml')
+        anekdots = soup.findAll('div', class_ = 'text')
 
         for line_break in soup.findAll('br'):  # solve the soup.text problem, which eats up the html tag <br>
             line_break.replaceWith(delimiter)

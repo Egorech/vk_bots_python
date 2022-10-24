@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 # import all the libraries for the vk_api
 import vk_api
-from vk_api.longpoll import VkLongPoll , VkEventType
+from vk_api.longpoll import VkLongPoll, VkEventType
 
 # libraries with vk token and vk group_id
 import _token
@@ -17,7 +17,7 @@ group_id = _token.group_id
 token = _token.token
 
 
-def send_photo( photo1 ):
+def send_photo(photo1):
     """
     function to send photos
     """
@@ -31,7 +31,7 @@ def send_photo( photo1 ):
     attachment = f'photo{owner_id}_{photo_id}_{access_key}'
 
 
-def face_recognizer( img ):
+def face_recognizer(img):
     """
     function that frames a person's face in red and writes it to the file ai_photo.jpg
     """
@@ -45,14 +45,14 @@ def face_recognizer( img ):
     faces = cv2.CascadeClassifier('front_face.xml')
 
     # coordinates of all found objects
-    results = faces.detectMultiScale(img , scaleFactor = 2 , minNeighbors = 1)
+    results = faces.detectMultiScale(img, scaleFactor = 2, minNeighbors = 1)
 
     # highlight faces with a red frame
-    for (x , y , w , h) in results:
-        cv2.rectangle(img , (x , y) , (x + w , y + h) , (0 , 0 , 255) , thickness = 2)
+    for (x, y, w, h) in results:
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), thickness = 2)
 
     # file a photo
-    cv2.imwrite("images/ai_photo.jpg" , img)
+    cv2.imwrite("images/ai_photo.jpg", img)
 
 
 def main():
@@ -69,8 +69,8 @@ def main():
                     'url']
 
                 # write the photo using the url to the images folder, name it ai_photo.jpg
-                r = requests.get(url , stream = True)
-                with open('images/ai_photo.jpg' , 'bw') as f:
+                r = requests.get(url, stream = True)
+                with open('images/ai_photo.jpg', 'bw') as f:
                     for chunk in r.iter_content(8192):
                         f.write(chunk)
 
@@ -80,20 +80,19 @@ def main():
 
                 send_photo('images/ai_photo.jpg')
                 vk.messages.send(
-                    chat_id = event.chat_id ,
-                    random_id = 0 ,
+                    chat_id = event.chat_id,
+                    random_id = 0,
                     attachment = attachment
                 )
             except IndexError:
                 vk.messages.send(
-                    chat_id = event.chat_id ,
+                    chat_id = event.chat_id,
                     message = 'Бот предназначен для распознавания фото.'
                     , random_id = 0
                 )
 
 
 if __name__ == '__main__':
-
     # linking to vk
     vk_session = vk_api.VkApi(token = token)
     longpoll = VkLongPoll(vk_session)
